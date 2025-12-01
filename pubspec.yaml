@@ -1,7 +1,8 @@
 name: app_contact_checker
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+repository: https://github.com/techComet/app_contact_checker
+homepage: https://github.com/techComet/app_contact_checker
 
 environment:
   sdk: ^3.10.1
