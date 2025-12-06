@@ -1,5 +1,8 @@
 ## 0.0.3
 
+* Added iOS implementation to check if apps are installed.
+* Updated `Info.plist` with `LSApplicationQueriesSchemes` for iOS.
+* Updated `README.md` to clarify platform differences and testing status.
 * Reordered methods in Dart files for better readability.
 * Added documentation comments to the platform interface methods.
 * Improved error logging in the method channel.
