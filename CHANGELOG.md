@@ -9,11 +9,11 @@
 * Improved contact permission handling logic.
 
 ## 0.0.2
-* Update README.md
+* Added a usage example to the `README.md`.
 
 
 ## 0.0.1
 
 * Initial release of the plugin, with support for checking contacts on WhatsApp, WhatsApp Business, and Telegram.
 * Updated license to "Unlicense".
-* Added a usage example to the `README.md`.
+* Update README.md
