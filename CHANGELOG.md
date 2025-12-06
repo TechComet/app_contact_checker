@@ -1,5 +1,6 @@
 ## 0.0.3
 
+* Clarified usage example in `README.md` with a sample phone number.
 * Added iOS implementation to check if apps are installed.
 * Updated `Info.plist` with `LSApplicationQueriesSchemes` for iOS.
 * Updated `README.md` to clarify platform differences and testing status.
