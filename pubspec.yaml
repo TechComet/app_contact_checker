@@ -1,6 +1,6 @@
 name: app_contact_checker
 description: A Flutter plugin to check if a phone number is registered on popular messaging apps like WhatsApp, Telegram, and more. Provides a simple and unified API for both Android and iOS.
-version: 0.0.3
+version: 0.0.4
 repository: https://github.com/techComet/app_contact_checker
 homepage: https://github.com/techComet/app_contact_checker
 
