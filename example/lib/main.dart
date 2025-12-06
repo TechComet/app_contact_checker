@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: TextField(
-                  decoration: InputDecoration(border: OutlineInputBorder(), hint: Text('+970505123456')),
+                  decoration: InputDecoration(border: OutlineInputBorder(), hint: Text('+970591234567')),
                   keyboardType: TextInputType.phone,
                   onSubmitted: _checkPhone,
                   onChanged: (phoneNumber) => _phoneNumber = phoneNumber,
