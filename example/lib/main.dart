@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:app_contact_checker/app_contact_checker.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
