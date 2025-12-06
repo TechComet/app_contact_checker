@@ -23,21 +23,24 @@ abstract class AppContactCheckerPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<bool> isOnWhatsAppBusiness(String phone) {
+  /// Checks if a contact is on Telegram.
+  Future<bool> isOnTelegram(String phone) {
     throw UnimplementedError(
-      'isOnWhatsAppBusiness(String phone) has not been implemented.',
+      'isOnTelegram(String phone) has not been implemented.',
     );
   }
 
+  /// Checks if a contact is on WhatsApp.
   Future<bool> isOnWhatsApp(String phone) {
     throw UnimplementedError(
       'isOnWhatsApp(String phone) has not been implemented.',
     );
   }
 
-  Future<bool> isOnTelegram(String phone) {
+  /// Checks if a contact is on WhatsApp Business.
+  Future<bool> isOnWhatsAppBusiness(String phone) {
     throw UnimplementedError(
-      'isOnTelegram(String phone) has not been implemented.',
+      'isOnWhatsAppBusiness(String phone) has not been implemented.',
     );
   }
 }

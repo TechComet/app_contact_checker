@@ -25,10 +25,15 @@ class MethodChannelAppContactChecker extends AppContactCheckerPlatform {
       return await methodChannel.invokeMethod(method, {'phone': phone}) ??
           false;
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
       return false;
     }
   }
+
+  @override
+  Future<bool> isOnTelegram(String phone) => _check('isOnTelegram', phone);
 
   @override
   Future<bool> isOnWhatsApp(String phone) => _check('isOnWhatsApp', phone);
@@ -36,7 +41,4 @@ class MethodChannelAppContactChecker extends AppContactCheckerPlatform {
   @override
   Future<bool> isOnWhatsAppBusiness(String phone) =>
       _check('isOnWhatsAppBusiness', phone);
-
-  @override
-  Future<bool> isOnTelegram(String phone) => _check('isOnTelegram', phone);
 }
