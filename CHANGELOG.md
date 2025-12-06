@@ -1,3 +1,8 @@
+## 0.0.4
+
+* Improved package description in `pubspec.yaml` for better clarity on pub.dev.
+* Updated `LICENSE` file to use the full, official text of the Unlicense to improve recognition by pub.dev.
+
 ## 0.0.3
 
 * Clarified usage example in `README.md` with a sample phone number.
