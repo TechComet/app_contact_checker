@@ -11,6 +11,8 @@
 ## Getting Started
 
 ```dart
+String phoneNumber = "+970591234567";
+
 final _appContactCheckerPlugin = AppContactChecker();
 
 _whatsAppChecker = await _appContactCheckerPlugin.isOnWhatsApp(phoneNumber);
