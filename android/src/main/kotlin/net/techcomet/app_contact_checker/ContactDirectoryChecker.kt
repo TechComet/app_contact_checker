@@ -6,6 +6,9 @@ import android.provider.ContactsContract
 class ContactDirectoryChecker(private val contentResolver: ContentResolver) {
 
     fun isContactInApp(phone: String, accountType: String): Boolean {
+        if (phone.isBlank()) {
+            return false
+        }
         val cleanPhone = phone.replace(Regex("[^0-9+]"), "")
         val uri = ContactsContract.Data.CONTENT_URI
         val projection = arrayOf(ContactsContract.Data._ID)

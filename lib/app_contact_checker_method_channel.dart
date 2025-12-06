@@ -11,7 +11,16 @@ class MethodChannelAppContactChecker extends AppContactCheckerPlatform {
   final methodChannel = const MethodChannel('app_contact_checker');
 
   Future<bool> _check(String method, String phone) async {
-    if (!(await Permission.contacts.request()).isGranted) return false;
+    final status = await Permission.contacts.status;
+    if (status.isPermanentlyDenied) {
+      return false;
+    }
+    if (!status.isGranted) {
+      if (!(await Permission.contacts.request()).isGranted) {
+        return false;
+      }
+    }
+
     try {
       return await methodChannel.invokeMethod(method, {'phone': phone}) ??
           false;
@@ -29,5 +38,5 @@ class MethodChannelAppContactChecker extends AppContactCheckerPlatform {
       _check('isOnWhatsAppBusiness', phone);
 
   @override
-  Future<bool> isOnTelegram(String phone) => _check('isOnWhatsApp', phone);
+  Future<bool> isOnTelegram(String phone) => _check('isOnTelegram', phone);
 }

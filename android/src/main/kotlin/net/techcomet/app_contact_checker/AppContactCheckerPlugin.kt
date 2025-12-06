@@ -5,17 +5,17 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /** AppContactCheckerPlugin */
-class AppContactCheckerPlugin :
-    FlutterPlugin,
-    MethodCallHandler {
-    // The MethodChannel that will the communication between Flutter and native Android
-    //
-    // This local reference serves to register the plugin with the Flutter Engine and unregister it
-    // when the Flutter Engine is detached from the Activity
+class AppContactCheckerPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
     private lateinit var contentResolver: android.content.ContentResolver
+    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "app_contact_checker")
@@ -23,23 +23,25 @@ class AppContactCheckerPlugin :
         channel.setMethodCallHandler(this)
     }
 
-    override fun onMethodCall(
-        call: MethodCall,
-        result: Result
-    ) {
+    override fun onMethodCall(call: MethodCall, result: Result) {
         val phone = call.argument<String>("phone") ?: ""
         val checker = ContactDirectoryChecker(contentResolver)
-        when (call.method) {
-            "isOnWhatsApp" ->
-                result.success(checker.isContactInApp(phone, "com.whatsapp"))
 
-            "isOnWhatsAppBusiness" ->
-                result.success(checker.isContactInApp(phone, "com.whatsapp.w4b"))
-
-            "isOnTelegram" ->
-                result.success(checker.isContactInApp(phone, "org.telegram.messenger"))
-
-            else -> result.notImplemented()
+        scope.launch(Dispatchers.IO) {
+            try {
+                val isInApp = when (call.method) {
+                    "isOnWhatsApp" -> checker.isContactInApp(phone, "com.whatsapp")
+                    "isOnWhatsAppBusiness" -> checker.isContactInApp(phone, "com.whatsapp.w4b")
+                    "isOnTelegram" -> checker.isContactInApp(phone, "org.telegram.messenger")
+                    else -> {
+                        withContext(Dispatchers.Main) { result.notImplemented() }
+                        return@launch
+                    }
+                }
+                withContext(Dispatchers.Main) { result.success(isInApp) }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) { result.error("Error", e.message, null) }
+            }
         }
     }
 
